@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+VisualStudioVersion = 15.0.28010.2048
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RobotNavigation", "RobotNavigation\RobotNavigation.csproj", "{FADFDCFB-F74C-426F-AC86-8694708459AF}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RobotNavigationTests", "RobotNavigationTests\RobotNavigationTests.csproj", "{FAC3AE5C-0A1D-4BC0-BED1-AE95E5DA5D0F}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{FADFDCFB-F74C-426F-AC86-8694708459AF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FADFDCFB-F74C-426F-AC86-8694708459AF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FADFDCFB-F74C-426F-AC86-8694708459AF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FADFDCFB-F74C-426F-AC86-8694708459AF}.Release|Any CPU.Build.0 = Release|Any CPU
+		{FAC3AE5C-0A1D-4BC0-BED1-AE95E5DA5D0F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FAC3AE5C-0A1D-4BC0-BED1-AE95E5DA5D0F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FAC3AE5C-0A1D-4BC0-BED1-AE95E5DA5D0F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FAC3AE5C-0A1D-4BC0-BED1-AE95E5DA5D0F}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {48A274F8-EC8F-462B-8926-EC24BE6598DD}
+	EndGlobalSection
+EndGlobal
