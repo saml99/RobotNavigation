@@ -15,18 +15,19 @@ namespace RobotNavigation
             Wall
         }
 
-        private int _width;
-        private int _height;
+        public int Width { get; set; }
+        public int Height { get; set; }
+       
         private Cell[,] _maze;
 
         public Maze(int width, int height)
         {
-            _width = width;
-            _height = height;
-            _maze = new Cell[width, height];
-            for (int i = 0; i < width; i++)
+            Width = width;
+            Height = height;
+            _maze = new Cell[Width, Height];
+            for (int i = 0; i < Width; i++)
             {
-                for (int j = 0; j < height; j++)
+                for (int j = 0; j < Height; j++)
                 {
                     _maze[i, j] = Cell.Empty;
                 }
@@ -42,5 +43,6 @@ namespace RobotNavigation
         {
             _maze[x, y] = c;
         }
+
     }
 }
