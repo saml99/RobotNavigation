@@ -18,13 +18,13 @@ namespace RobotNavigation
         {
             for (int y = 0; y < _maze.Height; y++)
             {
-         
+
                 for (int x = 0; x < _maze.Width; x++)
                 {
-                    switch (_maze.getCell(x,y))
+                    switch (_maze.getCell(x, y))
                     {
                         case Maze.Cell.Empty:
-                            Console.Write(" ");
+                            Console.Write("*");
                             break;
                         case Maze.Cell.Target:
                             Console.Write("T");
@@ -36,5 +36,6 @@ namespace RobotNavigation
                 }
                 Console.WriteLine();
             }
+        }
     }
 }

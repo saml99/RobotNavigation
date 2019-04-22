@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -10,14 +11,25 @@ namespace RobotNavigation
     {
         static void Main(string[] args)
         {
-            var maze = new Maze(5, 11);
+            MazeConfigReader mazeReader = new MazeConfigReader();
 
-            maze.setCell(2, 7, Maze.Cell.Target);
+            var maze = mazeReader.ReadFile("C:\\Users\\sam.lewis\\Documents\\IntroToAI\\RobotNavigation\\MazeConfig.txt");
+
+            MazeSearch mazeSearch = new MazeSearch();
+            BreadthFirstSearch<Maze> bfs = new BreadthFirstSearch<Maze>(mazeSearch);
+
+            bfs.search(new State<Maze>(null, null, maze.getCell()));
+
+            //maze.setCell(0, 1, Maze.Cell.Target);
+            //maze.setCell(7, 0, Maze.Cell.Target);
+            //maze.setCell(10, 3, Maze.Cell.Target);
 
 
             var view = new MazeView(maze);
 
             view.Display();
+
+            Console.ReadLine();
         }
     }
 }

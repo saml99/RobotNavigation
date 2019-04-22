@@ -17,10 +17,15 @@ namespace RobotNavigation
 
         public int Width { get; set; }
         public int Height { get; set; }
+
+        private int up;
+        private int right;
+        private int down;
+        private int left;
        
         private Cell[,] _maze;
 
-        public Maze(int width, int height)
+        public Maze(int height, int width)
         {
             Width = width;
             Height = height;
@@ -44,5 +49,24 @@ namespace RobotNavigation
             _maze[x, y] = c;
         }
 
+        public int getUp()
+        {
+            return up;
+        }
+
+        public int getRight()
+        {
+            return right;
+        }
+
+        public int getDown()
+        {
+            return down;
+        }
+
+        public int getLeft()
+        {
+            return left;
+        }
     }
 }
