@@ -22,16 +22,7 @@ namespace RobotNavigation
 
         public bool IsSolved(Position currentPos) 
         {
-            foreach (Position position in _maze.GetTargets())
-            {
-                int i = 0;
-                if (currentPos.GetPosition(_maze) == _maze.GetTargets()[i])
-                {
-                    return true;
-                }
-                i++;
-            }
-            return false;
+            return currentPos.GetPosition(_maze).Cell == Position.CellType.Target;
         }
 
         public ArrayList DetermineMoveSet(State<Position> state)

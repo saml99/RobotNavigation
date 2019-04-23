@@ -9,9 +9,11 @@ namespace RobotNavigation
     public class MazeView
     {
         private Maze _maze;
-        public MazeView(Maze maze)
+        private Position _position;
+        public MazeView(Maze maze, Position position)
         {
             _maze = maze;
+            _position = position;
         }
 
         public void Display()
@@ -21,15 +23,15 @@ namespace RobotNavigation
 
                 for (int x = 0; x < _maze.Width; x++)
                 {
-                    switch (_maze.GetCell(x, y))
+                    switch (_position.GetPosition(_maze).Cell)
                     {
-                        case Position.Cell.Empty:
+                        case Position.CellType.Empty:
                             Console.Write("*");
                             break;
-                        case Position.Cell.Target:
+                        case Position.CellType.Target:
                             Console.Write("T");
                             break;
-                        case Position.Cell.Wall:
+                        case Position.CellType.Wall:
                             Console.Write("X");
                             break;
                     }

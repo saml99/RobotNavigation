@@ -40,7 +40,7 @@ namespace RobotNavigation
             //maze.setCell(10, 3, Maze.Cell.Target);
 
 
-            var view = new MazeView(maze);
+            var view = new MazeView(maze, position);
 
             view.Display();
 

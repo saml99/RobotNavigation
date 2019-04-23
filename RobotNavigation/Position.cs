@@ -8,7 +8,7 @@ namespace RobotNavigation
 {
     public class Position
     {
-        public enum Cell
+        public enum CellType
         {
             Empty,
             Target,
@@ -16,6 +16,8 @@ namespace RobotNavigation
         }
 
         private string _message;
+
+        public CellType Cell { get; set; }
 
         public int X { get; set; }
         public int Y { get; set; }

@@ -32,21 +32,18 @@ namespace RobotNavigation
             int[] initialState = GetCoordinates(rgxArray2);
             pos.X = initialState[0];
             pos.Y = initialState[1];
-            maze.SetCell(pos.X, pos.Y, Position.Cell.Target);
+            maze.SetPosition(pos.X, pos.Y, Position.CellType.Target);
 
             line = _file.ReadLine();
             Regex rgxSplit = new Regex(@"\|");
             string[] rgxArray3 = rgxSplit.Split(line);
             foreach (string rgx in rgxArray3)
             {
-
                 string[] rgxArray = rgxComma.Split(rgx);
                 int[] coordinates = GetCoordinates(rgxArray);
                 int XPosition = coordinates[0];
                 int YPosition = coordinates[1];
-                maze.SetCell(XPosition, YPosition, Position.Cell.Target);
-                maze.SetTarget(XPosition, YPosition);
-
+                maze.SetPosition(XPosition, YPosition, Position.CellType.Target);
             }
 
             line = _file.ReadLine();
@@ -58,7 +55,7 @@ namespace RobotNavigation
                 {
                     for (int j = walls[1]; j < (walls[3] + walls[1]); j++)
                     {
-                        maze.SetCell(i, j, Position.Cell.Wall);
+                        maze.SetPosition(i, j, Position.CellType.Wall);
                     }
                 }
                 line = _file.ReadLine();
