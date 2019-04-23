@@ -23,7 +23,7 @@ namespace RobotNavigation
 
                 for (int x = 0; x < _maze.Width; x++)
                 {
-                    switch (_position.GetPosition(_maze).Type)
+                    switch (_maze.GetPosition(x, y).Type)
                     {
                         case Position.CellType.Empty:
                             Console.Write("*");

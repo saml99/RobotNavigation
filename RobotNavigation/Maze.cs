@@ -32,6 +32,7 @@ namespace RobotNavigation
             {
                 for (int j = 0; j < Height; j++)
                 {
+                    _maze[i, j] = new Position();
                     _maze[i, j].X = i;
                     _maze[i, j].Y = j;
                     _maze[i, j].Type = Position.CellType.Empty;
@@ -44,6 +45,11 @@ namespace RobotNavigation
             _maze[x, y].X = x;
             _maze[x, y].Y = y;
             _maze[x, y].Type = c;
+        }
+
+        public Position GetPosition(int x, int y)
+        {
+            return _maze[x, y];
         }
     }
 }

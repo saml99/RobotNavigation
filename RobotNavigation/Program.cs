@@ -30,8 +30,8 @@ namespace RobotNavigation
             // {
             //    ... unknown search method.  print an error.
             // }
-            MazeSearch mazeSearch = new MazeSearch(maze, position);
-            BreadthFirstSearch<Position> bfs = new BreadthFirstSearch<Position>(mazeSearch);
+            MazeSearch mazeSearch = new MazeSearch(maze);
+            BreadthFirstSearch bfs = new BreadthFirstSearch(mazeSearch);
 
             bfs.Search(new State<Position>(null, null, new Position(position.X, position.Y, "Initial")));
 
