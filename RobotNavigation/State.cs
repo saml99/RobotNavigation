@@ -12,7 +12,7 @@ namespace RobotNavigation
 
         private State<T> _parent;
 
-        private string _message;
+        private string _message;  // TL - what is the messsage you're storing here?  What is it for?
 
         private int _cost;
 
