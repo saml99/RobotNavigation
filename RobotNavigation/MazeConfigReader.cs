@@ -10,13 +10,15 @@ namespace RobotNavigation
 {
     public class MazeConfigReader
     {
-        private Maze _maze;
-        private Maze.Cell _initial;
-        private Maze.Cell[] _targets;
+        private Maze _maze;                     // TL - this doesn't belong here.  The class shouldn't have one of these inside it.
+        private Maze.Cell _initial;             // TL - shouldn't be required either
+        private Maze.Cell[] _targets;           // TL - see above
 
-        public Maze ReadFile(string name)
+        // TL - Make a MazeConfigReader constructor.  Pass the filename as the argument for it.  Open the file there.
+
+        public Maze ReadFile(string name)    // TL - Would recommend calling this function Load() instead and pass in a Maze object.  The objective is to read the config file and load the Maze with it.
         {
-            StreamReader file = new StreamReader(name);
+            StreamReader file = new StreamReader(name);  // TL - this should be done in the constructor.  The file variable should be a member variable.
 
             string line = file.ReadLine();
             Regex rgxComma = new Regex(",");
@@ -82,17 +84,17 @@ namespace RobotNavigation
             return regexArray;
         }
 
-        public Maze getMaze()
+        public Maze getMaze()        // TL - not required.  Delete
         {
             return _maze;
         }
 
-        public Maze.Cell getInitial()
+        public Maze.Cell getInitial()  // TL - not required - Delete
         {
             return _initial;
         }
 
-        public Maze.Cell[] getTargets()
+        public Maze.Cell[] getTargets()   // TL - not required - Delete.
         {
             return _targets;
         }
