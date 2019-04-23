@@ -17,7 +17,7 @@ namespace RobotNavigation
 
         private string _message;
 
-        public CellType Cell { get; set; }
+        public CellType Type { get; set; }
 
         public int X { get; set; }
         public int Y { get; set; }
@@ -34,7 +34,7 @@ namespace RobotNavigation
             this._message = message;
         }
 
-        public Position GetPosition(Maze maze)
+        public Position GetPosition(Maze maze) 
         {
             return this;
         }

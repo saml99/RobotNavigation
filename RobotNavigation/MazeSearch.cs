@@ -22,7 +22,7 @@ namespace RobotNavigation
 
         public bool IsSolved(Position currentPos) 
         {
-            return currentPos.GetPosition(_maze).Cell == Position.CellType.Target;
+            return currentPos.GetPosition(_maze).Type == Position.CellType.Target;
         }
 
         public ArrayList DetermineMoveSet(State<Position> state)

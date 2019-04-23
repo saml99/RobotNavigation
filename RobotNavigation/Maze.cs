@@ -12,7 +12,7 @@ namespace RobotNavigation
         public int Width { get; set; }
         public int Height { get; set; }
        
-        private Position.CellType[,] _maze;
+        private Position[,] _maze;
 
         public Maze()
         {
@@ -27,19 +27,23 @@ namespace RobotNavigation
 
         public void Init()
         {
-            _maze = new Position.CellType[Width, Height];
+            _maze = new Position[Width, Height];
             for (int i = 0; i < Width; i++)
             {
                 for (int j = 0; j < Height; j++)
                 {
-                    _maze[i, j] = Position.CellType.Empty;
+                    _maze[i, j].X = i;
+                    _maze[i, j].Y = j;
+                    _maze[i, j].Type = Position.CellType.Empty;
                 }
             }
         }
 
         public void SetPosition(int x, int y, Position.CellType c)
         {
-            _maze[x, y] = c;
+            _maze[x, y].X = x;
+            _maze[x, y].Y = y;
+            _maze[x, y].Type = c;
         }
     }
 }
