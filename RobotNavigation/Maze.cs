@@ -17,11 +17,6 @@ namespace RobotNavigation
 
         public int Width { get; set; }
         public int Height { get; set; }
-
-        private int up;
-        private int right;
-        private int down;
-        private int left;
        
         private Cell[,] _maze;
 
