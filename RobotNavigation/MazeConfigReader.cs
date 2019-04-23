@@ -16,7 +16,7 @@ namespace RobotNavigation
 
         // TL - Make a MazeConfigReader constructor.  Pass the filename as the argument for it.  Open the file there.
 
-        public Maze ReadFile(string name)    // TL - Would recommend calling this function Load() instead and pass in a Maze object.  The objective is to read the config file and load the Maze with it.
+        public Maze Load(string name)    // TL - Would recommend calling this function Load() instead and pass in a Maze object.  The objective is to read the config file and load the Maze with it.
         {
             StreamReader file = new StreamReader(name);  // TL - this should be done in the constructor.  The file variable should be a member variable.
 
