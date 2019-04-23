@@ -15,23 +15,57 @@ namespace RobotNavigation
             Wall
         }
 
-        public int Width { get; set; }
-        public int Height { get; set; }
-       
         private Cell[,] _maze;
+
+        public int Width
+        {
+            get
+            {
+                return Width;
+            }
+            set
+            {
+                Width = value;
+                Init();
+            }
+        }
+        public int Height {
+            get
+            {
+                return Height;
+            }
+            set
+            {
+                Height = value;
+                Init();
+            }
+        }       
+
+        private void Init()
+        {
+            if (Width > 0 && Height > 0)
+            {
+                _maze = new Cell[Width, Height];
+                for (int i = 0; i < Width; i++)
+                {
+                    for (int j = 0; j < Height; j++)
+                    {
+                        _maze[i, j] = Cell.Empty;
+                    }
+                }
+
+            }
+        }
+
+        public Maze()
+        {
+        }
 
         public Maze(int height, int width)
         {
             Width = width;
             Height = height;
-            _maze = new Cell[Width, Height];
-            for (int i = 0; i < Width; i++)
-            {
-                for (int j = 0; j < Height; j++)
-                {
-                    _maze[i, j] = Cell.Empty;
-                }
-            }
+            Init();
         }
         
         public Cell getCell(int x, int y)
