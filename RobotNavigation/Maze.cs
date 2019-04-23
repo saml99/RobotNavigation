@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -20,9 +21,13 @@ namespace RobotNavigation
        
         private Cell[,] _maze;
 
+        private ArrayList _posArray;
+        private Position _pos;
+
         public Maze()
         {
-
+            _pos = new Position();
+            _posArray = new ArrayList();
         }
 
         public Maze(int height, int width)
@@ -57,6 +62,18 @@ namespace RobotNavigation
         public void setCell(int x, int y, Cell c)
         {
             _maze[x, y] = c;
+        }
+
+        public void setTargets(int x, int y)
+        {
+            _pos.X = x;
+            _pos.Y = y;
+            _posArray.Add(_pos);
+        }
+
+        public ArrayList getTargets()
+        {
+            return _posArray;
         }
     }
 }

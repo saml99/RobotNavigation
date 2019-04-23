@@ -22,9 +22,9 @@ namespace RobotNavigation
 
         public bool isSolved(Position pos) 
         {
-            foreach (Maze.Cell cell in pos.getTargets())
+            foreach (Maze.Cell cell in _maze.getTargets())
             {
-                if (pos.getPosition(_maze) == pos.getTargets()[0])
+                if (pos.getPosition(_maze) == _maze.getTargets()[0])
                 {
                     return true;
                 }
@@ -36,8 +36,8 @@ namespace RobotNavigation
         {
             ArrayList moves = new ArrayList();
 
-            int x = state.getData().getX();
-            int y = state.getData().getY();
+            int x = state.getData().X;
+            int y = state.getData().Y;
             //int down = state.getData().getDown();
             //int left = state.getData().getLeft();
 

@@ -33,7 +33,7 @@ namespace RobotNavigation
             MazeSearch mazeSearch = new MazeSearch(maze, position);
             BreadthFirstSearch<Position> bfs = new BreadthFirstSearch<Position>(mazeSearch);
 
-            bfs.search(new State<Position>(null, null, new Position(mazeReader.getInitial(), "Initial")));
+            bfs.search(new State<Position>(null, null, new Position(position.X, position.Y, "Initial")));
 
             //maze.setCell(0, 1, Maze.Cell.Target);
             //maze.setCell(7, 0, Maze.Cell.Target);

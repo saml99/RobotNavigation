@@ -10,8 +10,6 @@ namespace RobotNavigation
     {
         private string _message;
 
-        private Maze.Cell _cell;
-
         public int X { get; set; }
         public int Y { get; set; }
 
@@ -27,20 +25,9 @@ namespace RobotNavigation
             this._message = message;
         }
 
-        public Position(Maze.Cell cell, string message)
+        public Position getPosition(Maze maze)
         {
-            this._cell = cell;
-            this._message = message;
-        }
-
-        public Maze.Cell getPosition(Maze maze)
-        {
-            return maze.getCell(X, Y);
-        }
-
-        public Maze.Cell[] getTargets()
-        {
-            return null;
+            return this;
         }
     }
 }
