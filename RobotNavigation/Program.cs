@@ -11,7 +11,7 @@ namespace RobotNavigation
     {
         static void Main(string[] args)
         {
-            MazeConfigReader mazeReader = new MazeConfigReader();
+            MazeConfigReader mazeReader = new MazeConfigReader();   // TL - this should accept the filename as a parameter.
 
             // TL - this should be using args[1] instead of this hard coded config file.
             var maze = mazeReader.Load("C:\\Users\\sam.lewis\\Documents\\IntroToAI\\RobotNavigation\\MazeConfig.txt");
