@@ -16,8 +16,7 @@ namespace RobotNavigation
 
         public MazeConfigReader(string name)
         {
-            StreamReader file = new StreamReader(name); 
-            this._file = file;
+            this._file = new StreamReader(name);
         }
 
         public void Load(Maze maze, Position pos)    // TL - Would recommend calling this function Load() instead and pass in a Maze object.  The objective is to read the config file and load the Maze with it.
