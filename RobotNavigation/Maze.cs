@@ -9,24 +9,19 @@ namespace RobotNavigation
 {
     public class Maze
     {
-        public enum Cell
-        {
-            Empty,
-            Target,
-            Wall
-        }
+        
 
         public int Width { get; set; }
         public int Height { get; set; }
        
-        private Cell[,] _maze;
+        private Position.Cell[,] _maze;
 
         private ArrayList _targets;
-        private Position _pos;
+        private Position _target;
 
         public Maze()
         {
-            _pos = new Position();
+            _target = new Position();
             _targets = new ArrayList();
         }
 
@@ -34,44 +29,44 @@ namespace RobotNavigation
         {
             Width = width;
             Height = height;
-            init();
+            Init();
         }
 
-        public void init()
+        public void Init()
         {
-            _maze = new Cell[Width, Height];
+            _maze = new Position.Cell[Width, Height];
             for (int i = 0; i < Width; i++)
             {
                 for (int j = 0; j < Height; j++)
                 {
-                    _maze[i, j] = Cell.Empty;
+                    _maze[i, j] = Position.Cell.Empty;
                 }
             }
         }
         
-        public Cell getCell(int x, int y)
+        public Position.Cell GetCell(int x, int y)
         {
             return _maze[x, y];
         }
 
-        public Cell getCell(Maze.Cell cell)
+        public Position.Cell GetCell(Position.Cell cell)
         {
             return cell;
         }
 
-        public void setCell(int x, int y, Cell c)
+        public void SetCell(int x, int y, Position.Cell c)
         {
             _maze[x, y] = c;
         }
 
-        public void setTargets(int x, int y)
+        public void SetTarget(int x, int y)
         {
-            _pos.X = x;
-            _pos.Y = y;
-            _targets.Add(_pos);
+            _target.X = x;
+            _target.Y = y;
+            _targets.Add(_target);
         }
 
-        public ArrayList getTargets()
+        public ArrayList GetTargets()
         {
             return _targets;
         }

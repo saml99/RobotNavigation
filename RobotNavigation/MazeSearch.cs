@@ -20,24 +20,26 @@ namespace RobotNavigation
             this._currentPosition = position;
         }
 
-        public bool isSolved(Position pos) 
+        public bool IsSolved(Position currentPos) 
         {
-            foreach (Maze.Cell cell in _maze.getTargets())
+            foreach (Position position in _maze.GetTargets())
             {
-                if (pos.getPosition(_maze) == _maze.getTargets()[0])
+                int i = 0;
+                if (currentPos.GetPosition(_maze) == _maze.GetTargets()[i])
                 {
                     return true;
                 }
+                i++;
             }
             return false;
         }
 
-        public ArrayList determineMoveSet(State<Position> state)
+        public ArrayList DetermineMoveSet(State<Position> state)
         {
             ArrayList moves = new ArrayList();
 
-            int x = state.getData().X;
-            int y = state.getData().Y;
+            int x = state.GetData().X;
+            int y = state.GetData().Y;
             //int down = state.getData().getDown();
             //int left = state.getData().getLeft();
 

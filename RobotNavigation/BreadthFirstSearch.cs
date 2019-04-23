@@ -23,9 +23,9 @@ namespace RobotNavigation
             _searched = 0;
         }
 
-        public void search(State<T> initial)
+        public void Search(State<T> initial)
         {
-            if(initial.getData() != null)
+            if(initial.GetData() != null)
             {
                 _frontier.AddFirst(initial);
             }

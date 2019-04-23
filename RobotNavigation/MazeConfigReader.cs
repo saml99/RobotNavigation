@@ -12,8 +12,6 @@ namespace RobotNavigation
     {
         private StreamReader _file;
 
-        private Position[] _targets;           // TL - see above
-
         public MazeConfigReader(string name)
         {
             this._file = new StreamReader(name);
@@ -27,15 +25,14 @@ namespace RobotNavigation
             int[] mazeSize = GetCoordinates(rgxArray1);
             maze.Height = mazeSize[0];
             maze.Width = mazeSize[1];
+            maze.Init();
 
             line = _file.ReadLine();
             string[] rgxArray2 = rgxComma.Split(line);
             int[] initialState = GetCoordinates(rgxArray2);
             pos.X = initialState[0];
             pos.Y = initialState[1];
-
-            maze.init();
-            maze.setCell(pos.X, pos.Y, Maze.Cell.Target);
+            maze.SetCell(pos.X, pos.Y, Position.Cell.Target);
 
             line = _file.ReadLine();
             Regex rgxSplit = new Regex(@"\|");
@@ -47,8 +44,8 @@ namespace RobotNavigation
                 int[] coordinates = GetCoordinates(rgxArray);
                 int XPosition = coordinates[0];
                 int YPosition = coordinates[1];
-                maze.setCell(XPosition, YPosition, Maze.Cell.Target);
-                maze.setTargets(XPosition, YPosition);
+                maze.SetCell(XPosition, YPosition, Position.Cell.Target);
+                maze.SetTarget(XPosition, YPosition);
 
             }
 
@@ -61,7 +58,7 @@ namespace RobotNavigation
                 {
                     for (int j = walls[1]; j < (walls[3] + walls[1]); j++)
                     {
-                        maze.setCell(i, j, Maze.Cell.Wall);
+                        maze.SetCell(i, j, Position.Cell.Wall);
                     }
                 }
                 line = _file.ReadLine();
@@ -79,11 +76,6 @@ namespace RobotNavigation
                 regexArray[i] = Int32.Parse(regex.Match(rgxArray[i]).ToString());
             }
             return regexArray;
-        }
-
-        public Maze.Cell[] getTargets()   // TL - not required - Delete.
-        {
-            return null;
         }
     }
 }

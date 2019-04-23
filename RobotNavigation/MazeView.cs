@@ -21,15 +21,15 @@ namespace RobotNavigation
 
                 for (int x = 0; x < _maze.Width; x++)
                 {
-                    switch (_maze.getCell(x, y))
+                    switch (_maze.GetCell(x, y))
                     {
-                        case Maze.Cell.Empty:
+                        case Position.Cell.Empty:
                             Console.Write("*");
                             break;
-                        case Maze.Cell.Target:
+                        case Position.Cell.Target:
                             Console.Write("T");
                             break;
-                        case Maze.Cell.Wall:
+                        case Position.Cell.Wall:
                             Console.Write("X");
                             break;
                     }

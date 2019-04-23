@@ -8,6 +8,13 @@ namespace RobotNavigation
 {
     public class Position
     {
+        public enum Cell
+        {
+            Empty,
+            Target,
+            Wall
+        }
+
         private string _message;
 
         public int X { get; set; }
@@ -25,7 +32,7 @@ namespace RobotNavigation
             this._message = message;
         }
 
-        public Position getPosition(Maze maze)
+        public Position GetPosition(Maze maze)
         {
             return this;
         }

@@ -11,15 +11,15 @@ namespace RobotNavigationTests
         public void TestCellEmpty()
         {
             Maze maze = new Maze(5, 11);
-            Assert.AreEqual(maze.getCell(2, 2), Maze.Cell.Empty);
+            Assert.AreEqual(maze.GetCell(2, 2), Maze.Cell.Empty);
         }
 
         [TestMethod]
         public void TestSetCell()
         {
             Maze maze = new Maze(5, 11);
-            maze.setCell(2, 2, Maze.Cell.Wall);
-            Assert.AreEqual(maze.getCell(2, 2), Maze.Cell.Wall);
+            maze.SetCell(2, 2, Maze.Cell.Wall);
+            Assert.AreEqual(maze.GetCell(2, 2), Maze.Cell.Wall);
         }
     }
 }
