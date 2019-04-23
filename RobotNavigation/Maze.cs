@@ -49,34 +49,14 @@ namespace RobotNavigation
             return cell;
         }
 
-        public Maze.Cell[] getTargets(Maze.Cell[] cells)
+        public Maze.Cell[] getTargets(MazeConfigReader mazeConfig)
         {
-            return cells;
+            return mazeConfig.getTargets();
         }
 
         public void setCell(int x, int y, Cell c)
         {
             _maze[x, y] = c;
-        }
-
-        public int getUp()
-        {
-            return up;
-        }
-
-        public int getRight()
-        {
-            return right;
-        }
-
-        public int getDown()
-        {
-            return down;
-        }
-
-        public int getLeft()
-        {
-            return left;
         }
     }
 }

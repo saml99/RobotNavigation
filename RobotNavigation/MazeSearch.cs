@@ -9,11 +9,11 @@ namespace RobotNavigation
 {
     class MazeSearch
     {
-        public bool isSolved(Maze maze, MazeConfigReader data)
+        public bool isSolved(Position data, Maze maze)
         {
             foreach (Maze.Cell cell in data.getTargets())
             {
-                if (maze.getCell(cell) == data.getTargets()[0])
+                if (data.getPosition(maze) == data.getTargets()[0])
                 {
                     return true;
                 }
@@ -21,16 +21,21 @@ namespace RobotNavigation
             return false;
         }
 
-        public ArrayList determineMoveSet(State<Maze> state)
+        public ArrayList determineMoveSet(State<Position> state)
         {
             ArrayList moves = new ArrayList();
 
-            int up = state.getData().getUp();
-            int right = state.getData().getRight();
-            int down = state.getData().getDown();
-            int left = state.getData().getLeft();
+            int x = state.getData().getX();
+            int y = state.getData().getY();
+            //int down = state.getData().getDown();
+            //int left = state.getData().getLeft();
 
-            return null;
+            if(y > 0)
+            {
+                moves.Add(new Position(x, y - 1, "UP"));
+            }
+
+            return moves;
         }
     }
 }
