@@ -21,13 +21,13 @@ namespace RobotNavigation
        
         private Cell[,] _maze;
 
-        private ArrayList _posArray;
+        private ArrayList _targets;
         private Position _pos;
 
         public Maze()
         {
             _pos = new Position();
-            _posArray = new ArrayList();
+            _targets = new ArrayList();
         }
 
         public Maze(int height, int width)
@@ -68,12 +68,12 @@ namespace RobotNavigation
         {
             _pos.X = x;
             _pos.Y = y;
-            _posArray.Add(_pos);
+            _targets.Add(_pos);
         }
 
         public ArrayList getTargets()
         {
-            return _posArray;
+            return _targets;
         }
     }
 }
