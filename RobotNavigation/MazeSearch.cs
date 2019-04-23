@@ -9,11 +9,11 @@ namespace RobotNavigation
 {
     class MazeSearch
     {
-        public bool isSolved(MazeConfigReader data)
+        public bool isSolved(Maze maze, MazeConfigReader data)
         {
             foreach (Maze.Cell cell in data.getTargets())
             {
-                if (data.getCurrent() == data.getTargets()[0])
+                if (maze.getCell(cell) == data.getTargets()[0])
                 {
                     return true;
                 }
@@ -29,6 +29,8 @@ namespace RobotNavigation
             int right = state.getData().getRight();
             int down = state.getData().getDown();
             int left = state.getData().getLeft();
+
+            return null;
         }
     }
 }

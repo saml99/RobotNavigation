@@ -37,11 +37,6 @@ namespace RobotNavigation
                 _frontier.RemoveFirst();
 
                 _searched++;
-
-                if (scene.isSolved(state.getData()))
-                {
-                    break;
-                }
             }
         }
     }

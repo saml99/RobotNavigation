@@ -44,6 +44,16 @@ namespace RobotNavigation
             return _maze[x, y];
         }
 
+        public Cell getCell(Maze.Cell cell)
+        {
+            return cell;
+        }
+
+        public Maze.Cell[] getTargets(Maze.Cell[] cells)
+        {
+            return cells;
+        }
+
         public void setCell(int x, int y, Cell c)
         {
             _maze[x, y] = c;

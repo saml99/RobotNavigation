@@ -10,20 +10,20 @@ namespace RobotNavigation
     {
         private T _data;
 
-        private State _parent;
+        private State<T> _parent;
 
         private string _message;
 
         private int _cost;
 
-        public State(State parent, string message, T data)
+        public State(State<T> parent, string message, T data)
         {
             this._parent = parent;
             this._message = message;
             this._data = data;
         }
 
-        public State(State parent, string message, T data, int cost)
+        public State(State<T> parent, string message, T data, int cost)
         {
             this._parent = parent;
             this._message = message;
@@ -31,7 +31,7 @@ namespace RobotNavigation
             this._cost = cost;
         }
 
-        public State getParent()
+        public State<T> getParent()
         {
             return _parent;
         }
