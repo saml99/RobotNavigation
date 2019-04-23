@@ -30,9 +30,9 @@ namespace RobotNavigation
             //    ... unknown search method.  print an error.
             // }
             MazeSearch mazeSearch = new MazeSearch();
-            BreadthFirstSearch<Maze.Cell> bfs = new BreadthFirstSearch<Maze.Cell>(mazeSearch);
+            BreadthFirstSearch<Position> bfs = new BreadthFirstSearch<Position>(mazeSearch);
 
-            bfs.search(new State<Maze.Cell>(null, null, maze.getCell(mazeReader.getInitial())));
+            bfs.search(new State<Position>(null, null, new Position(mazeReader.getInitial(), "Initial")));
 
             //maze.setCell(0, 1, Maze.Cell.Target);
             //maze.setCell(7, 0, Maze.Cell.Target);
