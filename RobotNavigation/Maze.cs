@@ -20,10 +20,20 @@ namespace RobotNavigation
        
         private Cell[,] _maze;
 
+        public Maze()
+        {
+
+        }
+
         public Maze(int height, int width)
         {
             Width = width;
             Height = height;
+            drawMaze();
+        }
+
+        public void drawMaze()
+        {
             _maze = new Cell[Width, Height];
             for (int i = 0; i < Width; i++)
             {
@@ -42,11 +52,6 @@ namespace RobotNavigation
         public Cell getCell(Maze.Cell cell)
         {
             return cell;
-        }
-
-        public Maze.Cell[] getTargets(MazeConfigReader mazeConfig)
-        {
-            return mazeConfig.getTargets();
         }
 
         public void setCell(int x, int y, Cell c)

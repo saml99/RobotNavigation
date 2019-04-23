@@ -10,19 +10,21 @@ namespace RobotNavigation
     class MazeSearch
     {
         private Maze _maze;
+        private Position _currentPosition;
         
         // TL - recommend storing the current position in the maze as a property (_current_pos)
 
-        public MazeSearch(Maze maze)   // TL - you might want to pass in the start position of the robot as well as the maze, then store it in _current_pos;
+        public MazeSearch(Maze maze, Position position)   // TL - you might want to pass in the start position of the robot as well as the maze, then store it in _current_pos;
         {
             this._maze = maze;
+            this._currentPosition = position;
         }
 
-        public bool isSolved(Position data)   // TL - data is a poor variable name as 'data' could be anything.  Try 'pos' insead
+        public bool isSolved(Position pos) 
         {
-            foreach (Maze.Cell cell in data.getTargets())
+            foreach (Maze.Cell cell in pos.getTargets())
             {
-                if (data.getPosition(_maze) == data.getTargets()[0])
+                if (pos.getPosition(_maze) == pos.getTargets()[0])
                 {
                     return true;
                 }

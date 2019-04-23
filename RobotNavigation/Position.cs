@@ -6,19 +6,24 @@ using System.Threading.Tasks;
 
 namespace RobotNavigation
 {
-    class Position
+    public class Position
     {
-        private int _x;
-        private int _y;
-
         private string _message;
 
         private Maze.Cell _cell;
 
+        public int X { get; set; }
+        public int Y { get; set; }
+
+        public Position()
+        {
+
+        }
+
         public Position(int x, int y, string message)
         {
-            this._x = x;
-            this._y = y;
+            this.X = x;
+            this.Y = y;
             this._message = message;
         }
 
@@ -28,19 +33,9 @@ namespace RobotNavigation
             this._message = message;
         }
 
-        public int getX()
-        {
-            return _x;
-        }
-
-        public int getY()
-        {
-            return _y;
-        }
-
         public Maze.Cell getPosition(Maze maze)
         {
-            return maze.getCell(_x, _y);
+            return maze.getCell(X, Y);
         }
 
         public Maze.Cell[] getTargets()
