@@ -34,7 +34,7 @@ namespace RobotNavigation
             pos.X = initialState[0];
             pos.Y = initialState[1];
 
-            maze.drawMaze();
+            maze.init();
             maze.setCell(pos.X, pos.Y, Maze.Cell.Target);
 
             line = _file.ReadLine();

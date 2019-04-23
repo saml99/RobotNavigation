@@ -34,10 +34,10 @@ namespace RobotNavigation
         {
             Width = width;
             Height = height;
-            drawMaze();
+            init();
         }
 
-        public void drawMaze()
+        public void init()
         {
             _maze = new Cell[Width, Height];
             for (int i = 0; i < Width; i++)
