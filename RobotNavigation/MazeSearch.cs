@@ -9,11 +9,18 @@ namespace RobotNavigation
 {
     class MazeSearch
     {
-        public bool isSolved(Position data, Maze maze)
+        private Maze _maze;
+
+        public MazeSearch(Maze maze)
+        {
+            this._maze = maze;
+        }
+
+        public bool isSolved(Position data)
         {
             foreach (Maze.Cell cell in data.getTargets())
             {
-                if (data.getPosition(maze) == data.getTargets()[0])
+                if (data.getPosition(_maze) == data.getTargets()[0])
                 {
                     return true;
                 }
