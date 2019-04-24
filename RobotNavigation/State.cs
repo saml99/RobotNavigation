@@ -31,22 +31,22 @@ namespace RobotNavigation
             this._cost = cost;
         }
 
-        public State<T> getParent()
+        public State<T> GetParent()
         {
             return _parent;
         }
 
-        public T getData()
+        public T GetData()
         {
             return _data;
         }
 
-        public string getMessage()
+        public string GetMessage()
         {
             return _message;
         }
 
-        public int getCost()
+        public int GetCost()
         {
             return _cost;
         }

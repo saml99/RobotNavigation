@@ -7,41 +7,52 @@ using System.Threading.Tasks;
 
 namespace RobotNavigation
 {
-    class Program
+    public class Program
     {
         static void Main(string[] args)
         {
-            MazeConfigReader mazeReader = new MazeConfigReader();   // TL - this should accept the filename as a parameter.
+            MazeConfigReader mazeReader = new MazeConfigReader(args[0]);
 
-            // TL - this should be using args[1] instead of this hard coded config file.
-            var maze = mazeReader.ReadFile("C:\\Users\\sam.lewis\\Documents\\IntroToAI\\RobotNavigation\\MazeConfig.txt");
+            var dimensions = mazeReader.ReadMazeDimensions();
+            var startPosition = mazeReader.ReadStartPosition();
+            var targetPositions = mazeReader.ReadTargetPositions();
+            var wallPositions = mazeReader.ReadWallPositions();
 
-            // TL - you should add your 
-            // if (args[2].Equals("breadthfirst", StringComparison.InvariantCultureIgnoreCase))
-            // { 
-            //    ... do breath first here
-            // } 
-            // else if (args[2].Equals("depthfirst", StringComparison.InvariantCultureIgnoreCase)) 
-            // {
-            //    ... do depth first here
-            // } 
+            Maze maze = new Maze(dimensions, wallPositions, targetPositions);
+
+            Position position = new Position();
+            MazeSearch mazeSearch = new MazeSearch(maze);
+
+            if (args[1].Equals("breadthfirstsearch", StringComparison.InvariantCultureIgnoreCase))
+            {
+                BreadthFirstSearch bfs = new BreadthFirstSearch(mazeSearch);
+                bfs.Search(new State<Position>(null, null, new Position(startPosition.ElementAt(0), startPosition.ElementAt(1), "Initial")));
+            } 
+            else if (args[1].Equals("depthfirstsearch", StringComparison.InvariantCultureIgnoreCase)) 
+            {
+                DepthFirstSearch dfs = new DepthFirstSearch(mazeSearch);
+                dfs.Search(new State<Position>(null, null, new Position(startPosition.ElementAt(0), startPosition.ElementAt(1), "Initial")));
+            }
+            else if (args[1].Equals("uniformcostsearch", StringComparison.InvariantCultureIgnoreCase))
+            {
+                UniformCostSearch ucs = new UniformCostSearch(mazeSearch);
+                ucs.Search(new State<Position>(null, null, new Position(startPosition.ElementAt(0), startPosition.ElementAt(1), "Initial"), 0));
+            }
             // else 
             // {
             //    ... unknown search method.  print an error.
             // }
-            MazeSearch mazeSearch = new MazeSearch();
-            BreadthFirstSearch<Position> bfs = new BreadthFirstSearch<Position>(mazeSearch);
 
-            bfs.search(new State<Position>(null, null, new Position(mazeReader.getInitial(), "Initial")));
+
 
             //maze.setCell(0, 1, Maze.Cell.Target);
             //maze.setCell(7, 0, Maze.Cell.Target);
             //maze.setCell(10, 3, Maze.Cell.Target);
 
 
-            var view = new MazeView(maze);
+            var view = new MazeView(maze, position);
 
-            view.Display();
+            //view.Display();
 
             Console.ReadLine();
         }

@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -8,50 +9,68 @@ namespace RobotNavigation
 {
     public class Maze
     {
-        public enum Cell
-        {
-            Empty,
-            Target,
-            Wall
-        }
-
         public int Width { get; set; }
         public int Height { get; set; }
        
-        private Cell[,] _maze;
+        private Position[,] _maze;
+
+        public Maze(List<int> dimensions, List<List<int>> wallPositions, List<List<int>> targetPositions)
+        {
+            Width = dimensions.ElementAt(1);
+            Height = dimensions.ElementAt(0);
+            Init();
+            LoopTargets(targetPositions);
+            LoopWalls(wallPositions);
+        }
 
         public Maze(int height, int width)
         {
             Width = width;
             Height = height;
-            _maze = new Cell[Width, Height];
+            Init();
+        }
+
+        public void Init()
+        {
+            _maze = new Position[Width, Height];
             for (int i = 0; i < Width; i++)
             {
                 for (int j = 0; j < Height; j++)
                 {
-                    _maze[i, j] = Cell.Empty;
+                    _maze[i, j] = new Position();
+                    _maze[i, j].X = i;
+                    _maze[i, j].Y = j;
+                    _maze[i, j].Type = Position.CellType.Empty;
                 }
             }
         }
-        
-        public Cell getCell(int x, int y)
+
+        public void SetPosition(int x, int y, Position.CellType c)
+        {
+            _maze[x, y].X = x;
+            _maze[x, y].Y = y;
+            _maze[x, y].Type = c;
+        }
+
+        public Position GetPosition(int x, int y)
         {
             return _maze[x, y];
         }
 
-        public Cell getCell(Maze.Cell cell)
+        public void LoopWalls(List<List<int>> wallPositions)
         {
-            return cell;
+            foreach (List<int> wall in wallPositions)
+            {
+                SetPosition(wall.ElementAt(0), wall.ElementAt(1), Position.CellType.Wall);
+            }
         }
 
-        public Maze.Cell[] getTargets(MazeConfigReader mazeConfig)
+        public void LoopTargets(List<List<int>> targetPositions)
         {
-            return mazeConfig.getTargets();
-        }
-
-        public void setCell(int x, int y, Cell c)
-        {
-            _maze[x, y] = c;
+            foreach (List<int> target in targetPositions)
+            {
+                SetPosition(target.ElementAt(0), target.ElementAt(1), Position.CellType.Target);
+            }
         }
     }
 }

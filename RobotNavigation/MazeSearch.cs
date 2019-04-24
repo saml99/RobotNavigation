@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace RobotNavigation
 {
-    class MazeSearch
+    public class MazeSearch
     {
         private Maze _maze;
         
@@ -18,33 +18,77 @@ namespace RobotNavigation
             this._maze = maze;
         }
 
-        public bool isSolved(Position data)   // TL - data is a poor variable name as 'data' could be anything.  Try 'pos' insead
+        public bool IsSolved(Position currentPos) 
         {
-            foreach (Maze.Cell cell in data.getTargets())
-            {
-                if (data.getPosition(_maze) == data.getTargets()[0])
-                {
-                    return true;
-                }
-            }
-            return false;
+            return currentPos.GetPosition(_maze).Type == Position.CellType.Target;
         }
 
-        public ArrayList determineMoveSet(State<Position> state)
+        public ArrayList DetermineMoveSet(State<Position> state, HashSet<Position> visited)
         {
             ArrayList moves = new ArrayList();
 
-            int x = state.getData().getX();
-            int y = state.getData().getY();
-            //int down = state.getData().getDown();
-            //int left = state.getData().getLeft();
+            int x = state.GetData().X;
+            int y = state.GetData().Y;
 
-            if(y > 0)
+            if (y > 0)
             {
-                moves.Add(new Position(x, y - 1, "UP"));
+                var up = _maze.GetPosition(x, y - 1);
+                if (!visited.Contains(up) && up.Type != Position.CellType.Wall)
+                {
+                    up.SetDirection("UP; ");
+                    moves.Add(up);
+                }
+            }
+            
+            if (x < _maze.Width - 1)
+            {
+                var right = _maze.GetPosition(x + 1, y);
+                if (!visited.Contains(right) && right.Type != Position.CellType.Wall)
+                {
+                    right.SetDirection("RIGHT; ");
+                    moves.Add(right);
+                }
+            }
+            
+            if (y < _maze.Height - 1)
+            {
+                var down = _maze.GetPosition(x, y + 1);
+                if (!visited.Contains(down) && down.Type != Position.CellType.Wall)
+                {
+                    down.SetDirection("DOWN; ");
+                    moves.Add(down);
+                }
+            }
+            
+            if (x > 0)
+            {
+                var left = _maze.GetPosition(x - 1, y);
+                if (!visited.Contains(left) && left.Type != Position.CellType.Wall)
+                {
+                    left.SetDirection("LEFT; ");
+                    moves.Add(left);
+                }
+            }
+            
+            return moves;
+        }
+
+        public void DisplaySolution(State<Position> state, int discovered)
+        {
+            Stack<string> stack = new Stack<string>();
+
+            while (state != null)
+            {
+                stack.Push(state.GetMessage());
+                state = state.GetParent();
             }
 
-            return moves;
+            Console.WriteLine(discovered);
+
+            while (stack.Any())
+            {
+                Console.Write(stack.Pop());
+            }
         }
     }
 }

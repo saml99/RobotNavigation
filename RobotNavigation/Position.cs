@@ -6,46 +6,47 @@ using System.Threading.Tasks;
 
 namespace RobotNavigation
 {
-    class Position
+    public class Position
     {
-        private int _x;
-        private int _y;
+        public enum CellType
+        {
+            Empty,
+            Target,
+            Wall
+        }
 
         private string _message;
 
-        private Maze.Cell _cell;
+        public CellType Type { get; set; }
+
+        public int X { get; set; }
+        public int Y { get; set; }
+
+        public Position()
+        {
+
+        }
 
         public Position(int x, int y, string message)
         {
-            this._x = x;
-            this._y = y;
+            this.X = x;
+            this.Y = y;
             this._message = message;
         }
 
-        public Position(Maze.Cell cell, string message)
+        public Position GetPosition(Maze maze) 
         {
-            this._cell = cell;
-            this._message = message;
+            return this;
         }
 
-        public int getX()
+        public string ToString()
         {
-            return _x;
+            return _message;
         }
 
-        public int getY()
+        public void SetDirection(string direction)
         {
-            return _y;
-        }
-
-        public Maze.Cell getPosition(Maze maze)
-        {
-            return maze.getCell(_x, _y);
-        }
-
-        public Maze.Cell[] getTargets()
-        {
-            return null;
+            _message = direction;
         }
     }
 }
