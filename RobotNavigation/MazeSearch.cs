@@ -53,5 +53,23 @@ namespace RobotNavigation
 
             return moves;
         }
+
+        public void DisplaySolution(State<Position> state, int discovered)
+        {
+            Stack<string> stack = new Stack<string>();
+
+            while (state != null)
+            {
+                stack.Push(state.GetMessage());
+                state = state.GetParent();
+            }
+
+            Console.WriteLine(discovered);
+
+            while (stack.Any())
+            {
+                Console.Write(stack.Pop());
+            }
+        }
     }
 }

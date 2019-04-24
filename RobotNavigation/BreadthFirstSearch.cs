@@ -46,6 +46,8 @@ namespace RobotNavigation
 
                 AddArrayToFrontier(search.DetermineMoveSet(state), state);
             }
+
+            
         }
 
         public void AddArrayToFrontier(ArrayList data, State<Position> parent)

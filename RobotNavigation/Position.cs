@@ -38,5 +38,10 @@ namespace RobotNavigation
         {
             return this;
         }
+
+        public string ToString()
+        {
+            return _message;
+        }
     }
 }
