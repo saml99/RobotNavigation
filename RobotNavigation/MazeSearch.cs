@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace RobotNavigation
 {
-    class MazeSearch
+    public class MazeSearch
     {
         private Maze _maze;
         

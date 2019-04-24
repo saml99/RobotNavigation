@@ -43,6 +43,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="BreadthFirstSearch.cs" />
+    <Compile Include="DepthFirstSearch.cs" />
     <Compile Include="MazeSearch.cs" />
     <Compile Include="Position.cs" />
     <Compile Include="State.cs" />

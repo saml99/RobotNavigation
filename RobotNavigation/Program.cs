@@ -7,11 +7,11 @@ using System.Threading.Tasks;
 
 namespace RobotNavigation
 {
-    class Program
+    public class Program
     {
         static void Main(string[] args)
         {
-            MazeConfigReader mazeReader = new MazeConfigReader("C:\\Users\\sam.lewis\\Documents\\IntroToAI\\RobotNavigation\\MazeConfig.txt");
+            MazeConfigReader mazeReader = new MazeConfigReader(args[0]);
 
             var dimensions = mazeReader.ReadMazeDimensions();
             var startPosition = mazeReader.ReadStartPosition();
@@ -21,26 +21,24 @@ namespace RobotNavigation
             Maze maze = new Maze(dimensions, wallPositions, targetPositions);
 
             Position position = new Position();
-            // TL - this should be using args[1] instead of this hard coded config file.
-            //mazeReader.Load(maze, position);
+            MazeSearch mazeSearch = new MazeSearch(maze);
 
-            // TL - you should add your 
-            // if (args[2].Equals("breadthfirst", StringComparison.InvariantCultureIgnoreCase))
-            // { 
-            //    ... do breath first here
-            // } 
-            // else if (args[2].Equals("depthfirst", StringComparison.InvariantCultureIgnoreCase)) 
-            // {
-            //    ... do depth first here
-            // } 
+            if (args[1].Equals("breadthfirstsearch", StringComparison.InvariantCultureIgnoreCase))
+            {
+                BreadthFirstSearch bfs = new BreadthFirstSearch(mazeSearch);
+                bfs.Search(new State<Position>(null, null, new Position(startPosition.ElementAt(0), startPosition.ElementAt(1), "Initial")));
+            } 
+            else if (args[1].Equals("depthfirstsearch", StringComparison.InvariantCultureIgnoreCase)) 
+            {
+                DepthFirstSearch dfs = new DepthFirstSearch(mazeSearch);
+                dfs.Search(new State<Position>(null, null, new Position(startPosition.ElementAt(0), startPosition.ElementAt(1), "Initial")));
+            } 
             // else 
             // {
             //    ... unknown search method.  print an error.
             // }
-            MazeSearch mazeSearch = new MazeSearch(maze);
-            BreadthFirstSearch bfs = new BreadthFirstSearch(mazeSearch);
 
-            bfs.Search(new State<Position>(null, null, new Position(startPosition.ElementAt(0), startPosition.ElementAt(1), "Initial")));
+
 
             //maze.setCell(0, 1, Maze.Cell.Target);
             //maze.setCell(7, 0, Maze.Cell.Target);
