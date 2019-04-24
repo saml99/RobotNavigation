@@ -32,7 +32,12 @@ namespace RobotNavigation
             {
                 DepthFirstSearch dfs = new DepthFirstSearch(mazeSearch);
                 dfs.Search(new State<Position>(null, null, new Position(startPosition.ElementAt(0), startPosition.ElementAt(1), "Initial")));
-            } 
+            }
+            else if (args[1].Equals("uniformcostsearch", StringComparison.InvariantCultureIgnoreCase))
+            {
+                UniformCostSearch ucs = new UniformCostSearch(mazeSearch);
+                ucs.Search(new State<Position>(null, null, new Position(startPosition.ElementAt(0), startPosition.ElementAt(1), "Initial"), 0));
+            }
             // else 
             // {
             //    ... unknown search method.  print an error.

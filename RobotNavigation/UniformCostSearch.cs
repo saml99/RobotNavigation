@@ -7,14 +7,14 @@ using System.Threading.Tasks;
 
 namespace RobotNavigation
 {
-    public class BreadthFirstSearch
+    public class UniformCostSearch
     {
         private LinkedList<State<Position>> _toCheck;
         private HashSet<State<Position>> _visited;
 
         public MazeSearch search;
 
-        public BreadthFirstSearch(MazeSearch search)
+        public UniformCostSearch(MazeSearch search)
         {
             _toCheck = new LinkedList<State<Position>>();
             _visited = new HashSet<State<Position>>();
@@ -42,7 +42,7 @@ namespace RobotNavigation
                 {
                     break;
                 }
-                
+
                 foreach (State<Position> statePosition in _visited)
                 {
                     visited.Add(statePosition.GetData());
@@ -59,9 +59,8 @@ namespace RobotNavigation
             {
                 if (!visited.Contains(s))
                 {
-                    _toCheck.AddLast(new State<Position>(parent, s.ToString(), s));
+                    _toCheck.AddLast(new State<Position>(parent, s.ToString(), s, parent.GetCost()+1));
                 }
-                
             }
         }
     }

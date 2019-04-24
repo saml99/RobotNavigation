@@ -14,16 +14,11 @@ namespace RobotNavigation
 
         public MazeSearch search;
 
-        private int _discovered;
-        private int _searched;
-
         public DepthFirstSearch(MazeSearch search)
         {
             _toCheck = new LinkedList<State<Position>>();
             _visited = new HashSet<State<Position>>();
             this.search = search;
-            _discovered = 0;
-            _searched = 0;
         }
 
         public void Search(State<Position> initial)
@@ -42,8 +37,6 @@ namespace RobotNavigation
                 state = _toCheck.First.Value;
                 _visited.Add(state);
                 _toCheck.RemoveFirst();
-
-                _searched++;
 
                 if (search.IsSolved(state.GetData()))
                 {
@@ -67,8 +60,6 @@ namespace RobotNavigation
                 if (!visited.Contains(s))
                 {
                     _toCheck.AddLast(new State<Position>(parent, s.ToString(), s));
-
-                    _discovered++;
                 }
 
             }
