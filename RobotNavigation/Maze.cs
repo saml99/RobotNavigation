@@ -14,8 +14,13 @@ namespace RobotNavigation
        
         private Position[,] _maze;
 
-        public Maze()
+        public Maze(List<int> dimensions, List<List<int>> wallPositions, List<List<int>> targetPositions)
         {
+            Width = dimensions.ElementAt(1);
+            Height = dimensions.ElementAt(0);
+            Init();
+            LoopTargets(targetPositions);
+            LoopWalls(wallPositions);
         }
 
         public Maze(int height, int width)
@@ -50,6 +55,22 @@ namespace RobotNavigation
         public Position GetPosition(int x, int y)
         {
             return _maze[x, y];
+        }
+
+        public void LoopWalls(List<List<int>> wallPositions)
+        {
+            foreach (List<int> wall in wallPositions)
+            {
+                SetPosition(wall.ElementAt(0), wall.ElementAt(1), Position.CellType.Wall);
+            }
+        }
+
+        public void LoopTargets(List<List<int>> targetPositions)
+        {
+            foreach (List<int> target in targetPositions)
+            {
+                SetPosition(target.ElementAt(0), target.ElementAt(1), Position.CellType.Target);
+            }
         }
     }
 }

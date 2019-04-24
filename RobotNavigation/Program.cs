@@ -12,10 +12,17 @@ namespace RobotNavigation
         static void Main(string[] args)
         {
             MazeConfigReader mazeReader = new MazeConfigReader("C:\\Users\\sam.lewis\\Documents\\IntroToAI\\RobotNavigation\\MazeConfig.txt");
-            Maze maze = new Maze();
+
+            var dimensions = mazeReader.ReadMazeDimensions();
+            var startPosition = mazeReader.ReadStartPosition();
+            var targetPositions = mazeReader.ReadTargetPositions();
+            var wallPositions = mazeReader.ReadWallPositions();
+
+            Maze maze = new Maze(dimensions, wallPositions, targetPositions);
+
             Position position = new Position();
             // TL - this should be using args[1] instead of this hard coded config file.
-            mazeReader.Load(maze, position);
+            //mazeReader.Load(maze, position);
 
             // TL - you should add your 
             // if (args[2].Equals("breadthfirst", StringComparison.InvariantCultureIgnoreCase))
@@ -33,7 +40,7 @@ namespace RobotNavigation
             MazeSearch mazeSearch = new MazeSearch(maze);
             BreadthFirstSearch bfs = new BreadthFirstSearch(mazeSearch);
 
-            bfs.Search(new State<Position>(null, null, new Position(position.X, position.Y, "Initial")));
+            bfs.Search(new State<Position>(null, null, new Position(startPosition.ElementAt(0), startPosition.ElementAt(1), "Initial")));
 
             //maze.setCell(0, 1, Maze.Cell.Target);
             //maze.setCell(7, 0, Maze.Cell.Target);
@@ -42,7 +49,7 @@ namespace RobotNavigation
 
             var view = new MazeView(maze, position);
 
-            view.Display();
+            //view.Display();
 
             Console.ReadLine();
         }

@@ -43,5 +43,10 @@ namespace RobotNavigation
         {
             return _message;
         }
+
+        public void SetDirection(string direction)
+        {
+            _message = direction;
+        }
     }
 }

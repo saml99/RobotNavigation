@@ -10,7 +10,6 @@ namespace RobotNavigation
     class MazeSearch
     {
         private Maze _maze;
-        private Position _currentPosition;
         
         // TL - recommend storing the current position in the maze as a property (_current_pos)
 
@@ -24,33 +23,53 @@ namespace RobotNavigation
             return currentPos.GetPosition(_maze).Type == Position.CellType.Target;
         }
 
-        public ArrayList DetermineMoveSet(State<Position> state)
+        public ArrayList DetermineMoveSet(State<Position> state, HashSet<Position> visited)
         {
             ArrayList moves = new ArrayList();
 
             int x = state.GetData().X;
             int y = state.GetData().Y;
 
-            if (y > 0 && _maze.GetPosition(x, y - 1).Type != Position.CellType.Wall)
+            if (y > 0)
             {
-                moves.Add(new Position(x, y - 1, "UP"));
+                var up = _maze.GetPosition(x, y - 1);
+                if (!visited.Contains(up) && up.Type != Position.CellType.Wall)
+                {
+                    up.SetDirection("UP; ");
+                    moves.Add(up);
+                }
             }
-
-            if (x < _maze.Width-1 && _maze.GetPosition(x + 1, y).Type != Position.CellType.Wall)
+            
+            if (x < _maze.Width - 1)
             {
-                moves.Add(new Position(x + 1, y, "RIGHT"));
+                var right = _maze.GetPosition(x + 1, y);
+                if (!visited.Contains(right) && right.Type != Position.CellType.Wall)
+                {
+                    right.SetDirection("RIGHT; ");
+                    moves.Add(right);
+                }
             }
-
-            if (y < _maze.Height-1 && _maze.GetPosition(x, y + 1).Type != Position.CellType.Wall)
+            
+            if (y < _maze.Height - 1)
             {
-                moves.Add(new Position(x, y + 1, "DOWN"));
+                var down = _maze.GetPosition(x, y + 1);
+                if (!visited.Contains(down) && down.Type != Position.CellType.Wall)
+                {
+                    down.SetDirection("DOWN; ");
+                    moves.Add(down);
+                }
             }
-
-            if (x > 0 && _maze.GetPosition(x - 1, y).Type != Position.CellType.Wall)
+            
+            if (x > 0)
             {
-                moves.Add(new Position(x - 1, y, "LEFT"));
+                var left = _maze.GetPosition(x - 1, y);
+                if (!visited.Contains(left) && left.Type != Position.CellType.Wall)
+                {
+                    left.SetDirection("LEFT; ");
+                    moves.Add(left);
+                }
             }
-
+            
             return moves;
         }
 

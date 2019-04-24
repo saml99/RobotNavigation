@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.IO;
 using System.Text.RegularExpressions;
+using System.Collections;
 
 namespace RobotNavigation
 {
@@ -17,60 +18,68 @@ namespace RobotNavigation
             this._file = new StreamReader(name);
         }
 
-        public void Load(Maze maze, Position pos)
+        public List<int> ReadMazeDimensions()
         {
-            string line = _file.ReadLine();
+            List<int> list = new List<int>();
             Regex rgxComma = new Regex(",");
+            string line = _file.ReadLine();
             string[] rgxArray1 = rgxComma.Split(line);
-            int[] mazeSize = GetCoordinates(rgxArray1);
-            maze.Height = mazeSize[0];
-            maze.Width = mazeSize[1];
-            maze.Init();
+            return GetCoordinates(rgxArray1);
+        }
 
-            line = _file.ReadLine();
+        public List<int> ReadStartPosition()
+        {
+            Regex rgxComma = new Regex(",");
+            string line = _file.ReadLine();
             string[] rgxArray2 = rgxComma.Split(line);
-            int[] initialState = GetCoordinates(rgxArray2);
-            pos.X = initialState[0];
-            pos.Y = initialState[1];
-            maze.SetPosition(pos.X, pos.Y, Position.CellType.Target);
+            return GetCoordinates(rgxArray2);
+        }
 
-            line = _file.ReadLine();
+        public List<List<int>> ReadTargetPositions()
+        {
+            List<List<int>> list = new List<List<int>>();
+            Regex rgxComma = new Regex(",");
+            string line = _file.ReadLine();
             Regex rgxSplit = new Regex(@"\|");
             string[] rgxArray3 = rgxSplit.Split(line);
             foreach (string rgx in rgxArray3)
             {
                 string[] rgxArray = rgxComma.Split(rgx);
-                int[] coordinates = GetCoordinates(rgxArray);
-                int XPosition = coordinates[0];
-                int YPosition = coordinates[1];
-                maze.SetPosition(XPosition, YPosition, Position.CellType.Target);
+                List<int> coordinates = GetCoordinates(rgxArray);
+                list.Add(coordinates);
             }
+            return list;
+        }
 
-            line = _file.ReadLine();
+        public List<List<int>> ReadWallPositions()
+        {
+            List<List<int>> list = new List<List<int>>();
+            Regex rgxComma = new Regex(",");
+            string line = _file.ReadLine();
             while (line != null)
             {
                 string[] rgxArray4 = rgxComma.Split(line);
-                int[] walls = GetCoordinates(rgxArray4);
+                List<int> walls = GetCoordinates(rgxArray4);
                 for (int i = walls[0]; i < (walls[2] + walls[0]); i++)
                 {
                     for (int j = walls[1]; j < (walls[3] + walls[1]); j++)
                     {
-                        maze.SetPosition(i, j, Position.CellType.Wall);
+                        list.Add(new List<int> {i, j});
                     }
                 }
                 line = _file.ReadLine();
             }
 
-            _file.Close();
-        }
+            return list;
+        }        
 
-        private int[] GetCoordinates(string[] rgxArray)
+        private List<int> GetCoordinates(string[] rgxArray)
         {
-            int[] regexArray = new int[4];
-            for (int i = 0; i < rgxArray.Length; i++)
+            List<int> regexArray = new List<int>();
+            foreach (string rgxVal in rgxArray)
             {
                 Regex regex = new Regex(@"\d+");
-                regexArray[i] = Int32.Parse(regex.Match(rgxArray[i]).ToString());
+                regexArray.Add(Int32.Parse(regex.Match(rgxVal).ToString()));
             }
             return regexArray;
         }

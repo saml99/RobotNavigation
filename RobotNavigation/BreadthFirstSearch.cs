@@ -9,7 +9,8 @@ namespace RobotNavigation
 {
     class BreadthFirstSearch
     {
-        private LinkedList<State<Position>> _frontier;
+        private LinkedList<State<Position>> _toCheck;
+        private HashSet<State<Position>> _visited;
 
         public MazeSearch search;
 
@@ -18,7 +19,8 @@ namespace RobotNavigation
 
         public BreadthFirstSearch(MazeSearch search)
         {
-            _frontier = new LinkedList<State<Position>>();
+            _toCheck = new LinkedList<State<Position>>();
+            _visited = new HashSet<State<Position>>();
             this.search = search;
             _discovered = 0;
             _searched = 0;
@@ -28,15 +30,18 @@ namespace RobotNavigation
         {
             if (initial.GetData() != null)
             {
-                _frontier.AddFirst(initial);
+                _toCheck.AddFirst(initial);
             }
 
             State<Position> state = null;
 
-            while (_frontier.Any())
+            var visited = new HashSet<Position>();
+
+            while (_toCheck.Any())
             {
-                state = _frontier.First.Value;
-                _frontier.RemoveFirst();
+                state = _toCheck.First.Value;
+                _visited.Add(state);
+                _toCheck.RemoveFirst();
 
                 _searched++;
 
@@ -44,20 +49,28 @@ namespace RobotNavigation
                 {
                     break;
                 }
-
-                AddArrayToFrontier(search.DetermineMoveSet(state), state);
+                
+                foreach (State<Position> statePosition in _visited)
+                {
+                    visited.Add(statePosition.GetData());
+                }
+                AddArrayToFrontier(visited, search.DetermineMoveSet(state, visited), state);
             }
 
-            
+            search.DisplaySolution(state, visited.Count);
         }
 
-        public void AddArrayToFrontier(ArrayList data, State<Position> parent)
+        public void AddArrayToFrontier(HashSet<Position> visited, ArrayList data, State<Position> parent)
         {
             foreach (Position s in data)
             {
-                _frontier.AddLast(new State<Position>(parent, s.ToString(), s));
+                if (!visited.Contains(s))
+                {
+                    _toCheck.AddLast(new State<Position>(parent, s.ToString(), s));
 
-                _discovered++;
+                    _discovered++;
+                }
+                
             }
         }
     }
