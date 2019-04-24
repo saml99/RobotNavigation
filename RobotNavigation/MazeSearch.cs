@@ -31,22 +31,22 @@ namespace RobotNavigation
             int x = state.GetData().X;
             int y = state.GetData().Y;
 
-            if (y > 0 || _maze.GetPosition(x, y - 1).Type != Position.CellType.Wall)
+            if (y > 0 && _maze.GetPosition(x, y - 1).Type != Position.CellType.Wall)
             {
                 moves.Add(new Position(x, y - 1, "UP"));
             }
 
-            if (x < _maze.Width || _maze.GetPosition(x + 1, y).Type != Position.CellType.Wall)
+            if (x < _maze.Width-1 && _maze.GetPosition(x + 1, y).Type != Position.CellType.Wall)
             {
                 moves.Add(new Position(x + 1, y, "RIGHT"));
             }
 
-            if (y < _maze.Height || _maze.GetPosition(x, y + 1).Type != Position.CellType.Wall)
+            if (y < _maze.Height-1 && _maze.GetPosition(x, y + 1).Type != Position.CellType.Wall)
             {
                 moves.Add(new Position(x, y + 1, "DOWN"));
             }
 
-            if (x > 0 || _maze.GetPosition(x - 1, y).Type != Position.CellType.Wall)
+            if (x > 0 && _maze.GetPosition(x - 1, y).Type != Position.CellType.Wall)
             {
                 moves.Add(new Position(x - 1, y, "LEFT"));
             }

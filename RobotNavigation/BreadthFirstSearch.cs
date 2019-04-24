@@ -35,6 +35,7 @@ namespace RobotNavigation
 
             while (_frontier.Any())
             {
+                state = _frontier.First.Value;
                 _frontier.RemoveFirst();
 
                 _searched++;
